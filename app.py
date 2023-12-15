@@ -1,5 +1,7 @@
-import streamlit as st
+import streamlit as st 
 import pandas as pd
+pd.set_option("styler.render.max_elements", 3167580)
+
 import helper_functions as hf
 
 # Set up page configuration
@@ -13,17 +15,21 @@ st.markdown("""<style>div.block-container {padding-top:1rem;}</style>""", unsafe
 # Load dataset
 df = pd.read_csv('dataset_visualization.csv')
 
-# Function to handle search and update session state
-def search_callback():
-    search_term = st.session_state.search_term
-    num_tweets = st.session_state.num_tweets
-    # Filter the DataFrame based on the search term and number of tweets
-    filtered = df[df['processed_content'].str.contains(search_term, case=False, na=False)].head(num_tweets)
-    st.session_state.filtered_df = filtered
-
 # Initialize filtered_df in session state
 if 'filtered_df' not in st.session_state:
     st.session_state.filtered_df = df
+
+# Function to handle search and update session state
+def search_callback():
+    search_term = st.session_state.search_term
+
+    # Filter the DataFrame based on the search term
+    filtered = df[df['processed_content'].str.contains(search_term, case=False, na=False)]
+    
+    if filtered.empty:
+        st.error("No tweets found for this search term. Please try again with a different term.")
+    else:
+        st.session_state.filtered_df = filtered
 
 # Sidebar setup
 with st.sidebar:
@@ -48,12 +54,15 @@ with st.sidebar:
     with st.form(key="search_form"):
         st.subheader("Search Parameters")
         st.text_input("Search term", key="search_term")
-        st.slider("Number of tweets", min_value=0, max_value=len(df), key="num_tweets")
-        st.form_submit_button(label="Search", on_click=search_callback)
-        st.markdown(
-            "Note: it may take a while to load the results, especially with a large number of tweets."
-        )
-
+        submitted = st.form_submit_button(label="Search", on_click=search_callback)
+        
+    # Display the count of tweets if the search has been submitted
+    if submitted and 'filtered_df' in st.session_state:
+        st.write(f"Number of tweets related to '{st.session_state.search_term}': {len(st.session_state.filtered_df)}")
+        
+    st.markdown(
+        "Note: it may take a while to load the results, especially with a large number of tweets."
+    )
     st.markdown("[Github link](https://github.com/SuperAmy99/Sentiment-Analysis)")
     st.markdown("Created by Lintong Li") 
 
@@ -91,8 +100,8 @@ def make_dashboard(filtered_df, bar_color, wc_color):
                 return "background-color: #FF7F0E"
 
         st.dataframe(
-            filtered_df[["Sentiment", "Tweet"]].style.applymap(
-                sentiment_color, subset=["Sentiment"]
+            filtered_df[["target", "text"]].style.applymap(
+                sentiment_color, subset=["target"]
             ),
             height=350,
         )
@@ -121,9 +130,9 @@ if "filtered_df" in st.session_state:
     with tab1:
         make_dashboard(st.session_state.filtered_df, bar_color="#54A24B", wc_color="Greens")
     with tab2:
-        positive_df = st.session_state.filtered_df.query("Sentiment == 'Positive'")
+        positive_df = st.session_state.filtered_df.query("target == 'Positive'")
         make_dashboard(positive_df, bar_color="#1F77B4", wc_color="Blues")
     with tab3:
-        negative_df = st.session_state.filtered_df.query("Sentiment == 'Negative'")
+        negative_df = st.session_state.filtered_df.query("target == 'Negative'")
         make_dashboard(negative_df, bar_color="#FF7F0E", wc_color="Oranges")
 

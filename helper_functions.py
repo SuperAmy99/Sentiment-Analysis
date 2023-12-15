@@ -5,6 +5,10 @@ from wordcloud import WordCloud
 from PIL import Image
 import plotly.express as px
 import plotly.io as pio
+from sklearn.feature_extraction.text import CountVectorizer
+import matplotlib.cm as mpl_cm
+import matplotlib.colors as mpl_colors
+import matplotlib as mpl
 
 
 # Create a custom plotly theme and set it as default
@@ -48,28 +52,6 @@ pio.templates["custom"].layout.colorway = [
 pio.templates.default = "custom"
 
 
-# Load dataset
-df = pd.read_csv('dataset_visualization.csv')
-
-# User input for search term
-user_search_term = input("Enter the search term: ")
-
-# Filter the DataFrame based on the search term
-filtered_df = df[df['processed_content'].str.contains(user_search_term, case=False, na=False)]
-
-# Display the total number of tweets related to the search term
-total_related_tweets = len(filtered_df)
-print(f"Total tweets containing '{user_search_term}': {total_related_tweets}")
-
-# User input for number of tweets to analyze
-user_num_tweets = int(input(f"Enter the number of tweets to analyze (max {total_related_tweets}): "))
-while user_num_tweets > total_related_tweets:
-    print(f"Please enter a number less than or equal to {total_related_tweets}.")
-    user_num_tweets = int(input(f"Enter the number of tweets to analyze (max {total_related_tweets}): "))
-
-# Filter to keep only the specified number of tweets
-filtered_df = filtered_df.head(user_num_tweets)
-
 def plot_sentiment(filtered_df):
     sentiment_count = filtered_df["target"].value_counts()
     fig = px.pie(
@@ -88,17 +70,29 @@ def plot_sentiment(filtered_df):
     fig.update_layout(showlegend=False)
     return fig
 
-
 def plot_wordcloud(filtered_df, colormap="Greens"):
+# Load stopwords
     stopwords = set()
     with open("stopwords_cust.txt", "r") as file:
         for word in file:
             stopwords.add(word.rstrip("\n"))
+
+# Set up color map
     cmap = mpl.cm.get_cmap(colormap)(np.linspace(0, 1, 20))
     cmap = mpl.colors.ListedColormap(cmap[10:15])
+
+    # Load mask image
     mask = np.array(Image.open("twitter_mask.png"))
+
+    # Set up font
     font = "quartzo.ttf"
-    text = " ".join(filtered_df["processed_content"])
+
+    # Ensure all entries are strings and drop NaN values
+    text_series = filtered_df["processed_content"].dropna().astype(str)
+    # Join all entries into a single string
+    text = " ".join(text_series)
+
+    # Create WordCloud
     wc = WordCloud(
         background_color="white",
         font_path=font,
@@ -112,12 +106,16 @@ def plot_wordcloud(filtered_df, colormap="Greens"):
         max_font_size=200,
     )
     wc.generate(text)
+
+    # Create matplotlib figure
     fig = plt.figure(figsize=(8, 8))
     ax = fig.add_subplot(1, 1, 1)
     plt.imshow(wc, interpolation="bilinear")
     plt.axis("off")
     plt.title("Wordcloud", fontdict={"fontsize": 16}, fontweight="heavy", pad=20, y=1.0)
+
     return fig
+
 
 
 def get_top_n_gram(filtered_df, ngram_range, n=10):
@@ -125,9 +123,11 @@ def get_top_n_gram(filtered_df, ngram_range, n=10):
     with open("stopwords_cust.txt", "r") as file:
         for word in file:
             stopwords.add(word.rstrip("\n"))
+    # Convert the set of stopwords to a list
+    stopwords_list = list(stopwords)
     corpus = filtered_df["processed_content"]
     vectorizer = CountVectorizer(
-        analyzer="word", ngram_range=ngram_range, stop_words=stopwords
+        analyzer="word", ngram_range=ngram_range, stop_words=stopwords_list
     )
     X = vectorizer.fit_transform(corpus.astype(str).values)
     words = vectorizer.get_feature_names_out()
