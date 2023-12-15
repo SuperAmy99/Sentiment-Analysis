@@ -1,4 +1,3 @@
-![Twitter Logo](https://drive.google.com/file/d/1CRZD4awuFLd8bagfyfKK0usIW4a5nO26/view?usp=sharing)
 
 # Exploring Emotions in Tweets: A Sentiment Analysis Project
 
