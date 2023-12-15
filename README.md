@@ -48,6 +48,11 @@ Explore the modeling process: [Jupyter Notebook on Sentiment Analysis - Machine 
 
 1. **Python Notebook**: Insights are visualized here: [Data Visualization Notebook](https://github.com/SuperAmy99/Sentiment-Analysis/blob/main/Sentiment%20Analysis%20-%20Data%20Visualization.ipynb).
 2. **Streamlit Application**: The app showcases results interactively. Check the [app.py](https://github.com/SuperAmy99/Sentiment-Analysis/blob/main/app.py) and [helper_functions.py](https://github.com/SuperAmy99/Sentiment-Analysis/blob/main/helper_functions.py).
+3. **Streamlit Screenshot**:
+![image](https://github.com/SuperAmy99/Sentiment-Analysis/assets/124481767/2fe785ac-e6e7-4d99-ad14-fb4cbde40f19)
+![image](https://github.com/SuperAmy99/Sentiment-Analysis/assets/124481767/8ca57b66-601d-4b7c-b350-66ae77869237)
+![image](https://github.com/SuperAmy99/Sentiment-Analysis/assets/124481767/22a76734-ec05-4a10-a284-f7c6aac405e1)
+
 
 ## Presentation
 
