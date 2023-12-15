@@ -2,75 +2,75 @@
 
 ## Introduction
 
-Sentiment Analysis is a technique that leverages data analysis to uncover the emotional tone behind text data. In this project, we explore the world of sentiment analysis and its real-world applications.
-
-## Why do we need sentiment analysis?
-
-Sentiment analysis offers real-time insights with applications in various sectors such as business, politics, and social research. It aids in decision-making and provides valuable predictive capabilities.
+Sentiment Analysis is a technique that leverages data analysis to uncover the emotional tone behind text data. In this project, I explore the world of sentiment analysis and its real-world applications.
 
 ## Project Overview
 
-This is an end-to-end machine learning project that covers the entire process of Twitter sentiment analysis, starting from data collection and preprocessing, model building, creating a dashboard, and finally deploying the model and dashboard as an online application.
-
-You can read the comprehensive guide (including code walkthroughs) to understand the detailed implementation of each phase of the project.
-
-[Link to Comprehensive Guide](link-to-your-guide.md)
+This is an end-to-end machine learning project that covers the entire process of Twitter sentiment analysis, including data collection, text cleaning, modeling, data visualization, and presentation.
 
 ### Data Collection
 
-For this project, we utilized a public dataset from Kaggle. You can access the dataset using the following link:
+For data collection, I utilized two sources:
 
-[Kaggle Sentiment140 Dataset](https://www.kaggle.com/datasets/kazanova/sentiment140/data)
+1. **Kaggle Dataset**: I used a public dataset from Kaggle to gather historical tweets for sentiment analysis. You can access the dataset using the following link:
 
-### Behind the Scenes: Data to Decisions
+   [Kaggle Sentiment140 Dataset](https://www.kaggle.com/datasets/kazanova/sentiment140/data)
 
-#### Data Collection
+2. **Scraper API**: I collected real-time tweets using the [Scraper API](https://dashboard.scraperapi.com/), which allowed me to access and gather tweets from Twitter.
 
-- Explain the sources of data, including the public dataset from Kaggle and real-time tweets from an API.
+### Data Modeling
 
-#### Preprocessing and Model Selection
+#### Text Preprocessing
 
-- Detail the steps involved in preprocessing the text data.
-- Mention the machine learning models you tested (Logistic Regression, Naive Bayes, and SVM).
-- Explain why Logistic Regression was chosen as the best model.
-- Describe the hyperparameter tuning process.
+- Text cleaning involved removing noise and irrelevant characters from the text data.
+- Tokenization: I split text into words or tokens to prepare it for further analysis.
+- Stemming and Lemmatization: I applied stemming and lemmatization techniques to reduce words to their base or root form.
+- Stopword Removal: I removed common stopwords from the text data to focus on meaningful words.
 
-#### Streamlit Application
+#### Machine Learning Models
 
-- Discuss the development of the Streamlit application for sentiment analysis.
-- Explain how the app visually presents sentiments in tweets and its practical value.
+I tested several machine learning models for sentiment analysis, including:
 
-## Case Studies
+- Logistic Regression
+- Naive Bayes
+- Support Vector Machine (SVM)
 
-Provide examples of case studies using the Twitter Sentiment Analyzer:
+#### Hyperparameter Tuning
 
-### Case Study 1: 'iPhone'
+To achieve optimal results, I fine-tuned the hyperparameters of the selected model (Logistic Regression). This process involved experimenting with different parameter settings to improve accuracy and performance.
 
-- Explain how the application analyzes sentiment around the keyword 'iPhone.'
-- Share the insights gained from analyzing the data, including the negative sentiments and specific issues identified.
+### Data Modeling Notebook
 
-### Case Study 2: 'racist'
+You can explore the data modeling process in this [Jupyter Notebook](https://github.com/SuperAmy99/Sentiment-Analysis/blob/main/Sentiment%20Analysis%20-%20Machine%20Learning.ipynb).
 
-- Describe the sentiment analysis applied to the keyword 'racist.'
-- Highlight the positive sentiment percentage and the insights gained regarding societal opinions.
+### Data Visualization
 
-## Limitations and Insights
+I visualized the data using Python and Streamlit:
 
-- Discuss the limitations encountered during the project, including the lack of real-time data and the model's ability to handle neutral tweets.
-- Address the language barrier limitation, restricting the analysis to English content.
-  
-## Conclusion
+1. Python Data Visualization Notebook: You can explore the data visualization process in this [Jupyter Notebook](https://github.com/SuperAmy99/Sentiment-Analysis/blob/main/Sentiment%20Analysis%20-%20Data%20Visualization.ipynb).
 
-Summarize the key findings and the project's significance in understanding public opinion and its applications in strategy-making.
+2. Streamlit Application: I developed a Streamlit application to present the sentiment analysis results. You can find the source code for the Streamlit app in [app.py](https://github.com/SuperAmy99/Sentiment-Analysis/blob/main/app.py) and the helper functions in [helper_functions.py](https://github.com/SuperAmy99/Sentiment-Analysis/blob/main/helper_functions.py).
 
-## Future Enhancements
+### Presentation
 
-Discuss potential future improvements and extensions to the project, such as handling complex expressions and supporting multiple languages.
+For a comprehensive presentation of this project, please refer to my [Twitter Sentiment Analysis PDF](https://github.com/SuperAmy99/Sentiment-Analysis/blob/main/twitter%20sentiment%20analysis.pdf).
 
-## Q&A
+### Libraries Used
 
-Invite questions and provide contact information for further inquiries or collaboration.
+- pandas
+- numpy
+- matplotlib
+- wordcloud
+- PIL
+- plotly
+- scikit-learn
+- nltk
+- seaborn
+- requests
+- streamlit
+
+Make sure to have these libraries installed to run the project successfully. You can use `pip install <library-name>` to install any missing libraries.
 
 ---
 
-Thank you for visiting our Sentiment Analysis project! For more details, check out the project code and documentation.
+Thank you for visiting my Sentiment Analysis project! For more details, check out the project code and documentation.
