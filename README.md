@@ -1,3 +1,4 @@
+<img width="400" alt="image" src="https://github.com/SuperAmy99/Sentiment-Analysis/assets/124481767/aaae085f-a9e0-4279-9f08-fa3fbe834c3b">
 
 # Exploring Emotions in Tweets: A Sentiment Analysis Project
 
