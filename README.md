@@ -1,3 +1,5 @@
+![Twitter Logo](https://upload.wikimedia.org/wikipedia/commons/5/51/Twitter_logo.png)
+
 # Exploring Emotions in Tweets: A Sentiment Analysis Project
 
 ## Table of Contents
@@ -53,7 +55,17 @@ The project's findings are summarized in this accessible format: [Twitter Sentim
 
 ## Libraries Used
 
-Utilized libraries include pandas, numpy, matplotlib, wordcloud, PIL, plotly, scikit-learn, nltk, seaborn, requests, and streamlit, each playing a specific role in data processing and visualization.
+*pandas*\
+*numpy*\
+*matplotlib*\
+*wordcloud*\
+*PIL*\
+*plotly*\
+*scikit-learn*\
+*nltk*\
+*seaborn*\
+*requests*\
+*streamlit*
 
 ## Installation Instructions
 
@@ -66,9 +78,5 @@ This project showcases the potential of sentiment analysis in understanding publ
 ## Contact Information
 
 For further details or feedback, connect with me on [LinkedIn](https://www.linkedin.com/in/lintong-li/) or visit my [GitHub Profile](https://github.com/SuperAmy99/Sentiment-Analysis).
-
----
-
-Thank you for exploring my Sentiment Analysis project. Your insights and feedback are always welcome!
 
 ---
